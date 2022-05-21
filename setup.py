@@ -74,6 +74,7 @@ INSTALL_REQUIRES = [
     "pandas==1.0.*",
     "pyproj>=2.5",
     "scipy"
+    "PyQt5"
 ]
 
 if READ_THE_DOCS:
