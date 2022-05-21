@@ -30,7 +30,7 @@ class TestImport(unittest.TestCase):
             print("You have not properly installed: matplotlib")
             i += 1
         try:
-            matplotlib.use("Qt5Agg")
+            matplotlib.use("QtAgg")
         except ImportError:
             print("Failed to find a Qt backend - run `conda install pyqt`")
             i += 1
