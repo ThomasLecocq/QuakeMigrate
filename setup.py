@@ -73,7 +73,7 @@ INSTALL_REQUIRES = [
     "obspy>=1.2",
     "pandas==1.0.*",
     "pyproj>=2.5",
-    "scipy"
+    "scipy",
     "PyQt5"
 ]
 
