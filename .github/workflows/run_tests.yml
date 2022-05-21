@@ -31,6 +31,15 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install .
+      
+      - name: Install NonLinLoc
+        run: |
+          curl http://alomax.free.fr/nlloc/soft7.00/tar/NLL7.00_src.tgz -o NLL7.00_src.tgz
+          tar -xzvf NLL7.00_src.tgz
+          cd src
+          mkdir bin; export MYBIN=./bin
+          make -R all
+          export PATH=$PWD/bin:$PATH
 
       - name: Run tests
         working-directory: ./tests
