@@ -17,6 +17,7 @@ import unittest
 class TestImport(unittest.TestCase):
     def test_import(self):
         i = 0
+        import os
         import sys
         if sys.version_info.major != 3:
             print("QuakeMigrate does not support Python 2.x")
@@ -28,11 +29,6 @@ class TestImport(unittest.TestCase):
             import matplotlib  # NOQA
         except ImportError:
             print("You have not properly installed: matplotlib")
-            i += 1
-        try:
-            matplotlib.use("QtAgg")
-        except ImportError:
-            print("Failed to find a Qt backend - run `conda install pyqt`")
             i += 1
         try:
             import numpy  # NOQA
