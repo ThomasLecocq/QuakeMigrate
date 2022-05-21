@@ -1,5 +1,4 @@
 name: Run tests
-
 on:
   push:
     branches:
@@ -9,7 +8,8 @@ on:
       - "master"
 
 jobs:
-  test:
+  run_tests:
+    name: Build wheels on (ubuntu-latest, ${{ matrix.build }})
     runs-on: ubuntu-latest
 
     strategy:
@@ -18,29 +18,23 @@ jobs:
         python-version: [3.7, 3.8, 3.9]
 
     steps:
-        # Checkout the latest code from the repo
-      - name: Checkout repo
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-        # Setup which version of Python to use
-      - name: Set Up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python-version }}
 
-        # Display the Python version being used
-      - name: Display Python version
-        run: python -c "import sys; print(sys.version)"
+      - name: Install QuakeMigrate
+        run: |
+          python -m pip install --upgrade pip
+          pip install .
 
-        # Install the package using the setup.py
-      - name: Install package
-        run: python setup.py install
-
-        # Run the tests. I'm using pytest and the file is in the tests directory.
       - name: Run tests
         working-directory: ./tests
         run: |
           python test_import.py
           python run_test_examples.py
           python test_benchmarks.py
-
