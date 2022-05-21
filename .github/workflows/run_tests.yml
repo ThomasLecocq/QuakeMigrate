@@ -37,9 +37,10 @@ jobs:
           curl http://alomax.free.fr/nlloc/soft7.00/tar/NLL7.00_src.tgz -o NLL7.00_src.tgz
           tar -xzvf NLL7.00_src.tgz
           cd src
-          mkdir bin; export MYBIN=./bin
+          mkdir bin
           make -R all
-          export PATH=$PWD/bin:$PATH
+          mv Vel2Grid Grid2Time bin/.
+          echo "$PWD/bin" >> $GITHUB_PATH
 
       - name: Run tests
         working-directory: ./tests
