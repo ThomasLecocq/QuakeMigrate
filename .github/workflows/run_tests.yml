@@ -9,7 +9,7 @@ on:
 
 jobs:
   run_tests:
-    name: Build wheels on (ubuntu-latest, ${{ matrix.build }})
+    name: Run tests on (ubuntu-latest, Python ${{ matrix.python-version }})
     runs-on: ubuntu-latest
 
     strategy:
@@ -29,8 +29,8 @@ jobs:
 
       - name: Install QuakeMigrate
         run: |
-          python -m pip install --upgrade pip
-          pip install PyQT5
+          $CONDA/bin/conda env update --file quakemigrate.yml --name base
+          conda install pyqt
           pip install .
 
       - name: Run tests
